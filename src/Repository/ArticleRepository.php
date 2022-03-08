@@ -45,6 +45,29 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Article[]
+     */
+    public function findByThree(): array {
+        return $this->findBy([], ['id' => 'DESC'],3);
+    }
+
+    /**
+     * @param $id
+     * @return Article|null
+     */
+    public function findId($id): Article|null {
+        return $this->find($id);
+    }
+
+    /**
+     * @param $cat
+     * @return Article[]
+     */
+    public function findByCat($cat): array {
+        return $this->findBy(['category' => $cat]);
+    }
+
     // /**
     //  * @return Article[] Returns an array of Article objects
     //  */

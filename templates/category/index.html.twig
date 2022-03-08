@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
-    <h1>Symfony land</h1>
-    {% for category in categories %}
+    <h2>{{ category.name }}</h2>
+    {% if is_granted('ROLE_AUTHOR') %}
         <div>
-            <a href="{{ path('app_category', { 'id': category.id}) }}">{{ category.name }}</a>
+            <a href="{{ path("app_article_create", {'id': category.id}) }}">Créer un article</a>
         </div>
-    {% endfor %}
+    {% endif %}
+
     {% if articles|length > 0  %}
         {% for article in articles %}
             <div>
                 <h3>{{ article.title }}</h3>
-                <p>{{ article.category.name }}</p>
                 <p>{{ article.author.email }}</p>
                 <p>{{ article.datetime|date("m/d/Y") }}</p>
                 <p><a href="{{ path('app_article', { 'id': article.id}) }}">Lire l'article</a></p>

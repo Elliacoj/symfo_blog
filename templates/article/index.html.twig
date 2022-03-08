@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <div>
+        <h3>{{ article.title }}</h3>
+        <p>{{ article.content }}</p>
+        <p>{{ article.category.name }}</p>
+        <p>{{ article.author.email }}</p>
+        <p>{{ article.datetime|date("m/d/Y") }}</p>
+
+        <div>
+            {% for comment in article.comments %}
+                <div>
+                    <p>{{ comment.content }}</p>
+                    <p>par {{ comment.author.email }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

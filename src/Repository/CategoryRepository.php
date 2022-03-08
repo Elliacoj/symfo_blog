@@ -45,6 +45,13 @@ class CategoryRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return Category[]
+     */
+    public function findAllCat(): array {
+        return $this->findAll();
+    }
+
     // /**
     //  * @return Category[] Returns an array of Category objects
     //  */
