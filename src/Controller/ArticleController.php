@@ -4,9 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Entity\Comment;
 use App\Form\ArticleType;
+use App\Form\CommentType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\Location;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,14 +19,29 @@ class ArticleController extends AbstractController
 {
     /**
      * @param Article $article
-     * @param ArticleRepository $articleRepository
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
     #[Route('/article_{id}', name: 'app_article')]
-    public function index(Article $article,ArticleRepository $articleRepository): Response
+    public function index(Article $article, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $comment = new Comment();
+        $comment->addArticle($article)->setAuthor($this->getUser());
+        $form = $this->createForm(CommentType::class, $comment);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            return $this->redirect($_SERVER['HTTP_REFERER']);
+        }
+
         return $this->render('article/index.html.twig', [
             'article' => $article,
+            "form" => $form->createView()
+
         ]);
     }
 
@@ -44,10 +62,13 @@ class ArticleController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($article);
             $entityManager->flush();
+
+            return $this->redirectToRoute('app_category', ["id" => $category->getId()]);
         }
 
         return $this->render('article/add.html.twig', [
             'form' => $form->createView()
-            ]);
+            ]
+        );
     }
 }

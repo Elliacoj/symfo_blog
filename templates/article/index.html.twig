@@ -11,6 +11,11 @@
         <p>{{ article.datetime|date("m/d/Y") }}</p>
 
         <div>
+            {% if is_granted('ROLE_USER') %}
+            <div>
+                {{ form(form) }}
+            </div>
+            {% endif %}
             {% for comment in article.comments %}
                 <div>
                     <p>{{ comment.content }}</p>
