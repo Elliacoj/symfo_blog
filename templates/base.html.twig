@@ -13,6 +13,15 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
+        <div id="menu">
+            <div><a href="{{ path('app_home') }}">Accueil</a></div>
+
+            {% if is_granted('ROLE_USER') %}
+            <div><a href="{{ path('app_logout') }}">Deconnexion</a></div>
+            {% else %}
+            <div><a href="{{ path('app_login') }}">Connexion</a></div>
+            {% endif %}
+        </div>
     <body>
         {% block body %}{% endblock %}
     </body>
