@@ -3,24 +3,35 @@
 {% block title %}Article{% endblock %}
 
 {% block body %}
-    <div>
+    <div id="article_indiv">
         <h3>{{ article.title }}</h3>
-        <p>{{ article.content }}</p>
-        <p>{{ article.category.name }}</p>
-        <p>{{ article.author.email }}</p>
-        <p>{{ article.datetime|date("m/d/Y") }}</p>
+        {% if user == article.author.email%}
+        <div id="article_edition">
+            <p><a href="{{ path('app_article_edit', {"id": article.id}) }}">Editer</a></p>
+            <p><a href="{{ path('app_article_delete', {"id": article.id}) }}">Supprimer</a></p>
+        </div>
 
-        <div>
+        {% endif %}
+        <p>{{ article.content|nl2br }}</p>
+
+        <div id="article_info">
+            <p>{{ article.category.name }}</p>
+            <p>par {{ article.author.email }}</p>
+            <p>le {{ article.datetime|date("m/d/Y") }}</p>
+        </div>
+
+        <div id="commentaries">
+            <h4>Commentaire</h4>
             {% if is_granted('ROLE_USER') %}
-            <div>
+            <div id="commentaries_form">
                 {{ form(form) }}
             </div>
             {% endif %}
             {% for comment in article.comments %}
-                <div>
-                    <p>{{ comment.content }}</p>
-                    <p>par {{ comment.author.email }}</p>
-                </div>
+            <div class="commentary">
+                <p>{{ comment.content }}</p>
+                <p>par {{ comment.author.email }}</p>
+            </div>
             {% endfor %}
         </div>
     </div>

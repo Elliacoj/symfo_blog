@@ -1,0 +1,77 @@
+#article_indiv {
+    width: 95%;
+    margin: 2rem auto;
+}
+
+#article_indiv > h3 {
+    font-size: 4rem;
+    text-align: center;
+    text-shadow: 2px 2px 2px darkgray;
+    font-weight: bold;
+    margin: 2rem;
+}
+
+#article_indiv > p {
+    text-align: justify;
+    margin: 2rem 0;
+}
+
+#article_info {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+    font-size: 1.5rem;
+}
+
+#commentaries {
+    margin: 5rem 0;
+}
+
+#commentaries_form > form > div {
+    width: 50%;
+    margin-top: 6rem;
+    display: flex;
+}
+
+#commentaries_form > form > div > div:nth-child(1) {
+    width: 80%;
+}
+
+#commentaries_form > form > div textarea {
+    width: 100%;
+    padding: 1rem;
+}
+
+#commentaries_form > form > div button {
+    font-size: 2rem;
+    padding: 1rem;
+    margin: 2rem 1rem;
+    display: block;
+    cursor: pointer;
+}
+
+.commentary {
+    margin: 2rem 0;
+}
+
+.commentary > p:nth-child(2) {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+}
+
+#commentaries > h4 {
+    text-align: center;
+    text-decoration-line: underline;
+    font-size: 3rem;
+}
+
+#article_edition {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+    font-weight: bold;
+}
+
+#article_edition a:hover {
+    color: #0c4a6e;
+}

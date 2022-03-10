@@ -1,0 +1,105 @@
+#menu {
+    display: flex;
+    padding: 1rem 2rem;
+    justify-content: space-around;
+    border-bottom: darkgray;
+    background-color: #bed5ef;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px darkgray;
+}
+
+#menu > div > a:hover {
+    color: #0c4a6e;
+}
+
+h1 {
+    text-align: center;
+    font-size: 6rem;
+    padding: 2rem 0;
+    font-style: italic;
+    position: relative;
+    text-shadow: 2px 2px 2px darkgray;
+}
+
+#menu_categories {
+    display: flex;
+    padding: 1rem 2rem;
+    justify-content: space-around;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px darkgray;
+}
+
+#menu_categories > div > a:hover {
+    color: #0c4a6e;
+}
+
+.article_home {
+    width: 95%;
+    border: 1px solid darkgray;
+    border-radius: 10px;
+    box-shadow: 2px 2px 1px darkgray;
+    margin: 2rem auto;
+    font-family: "Comic Sans MS", "sans-serif";
+    background-color: #f1f1f1;
+}
+
+.article_home > h3 {
+    font-size: 3.5rem;
+    text-align: center;
+    padding: 2rem;
+}
+
+.article_home > div {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1rem;
+    font-size: 1.5rem;
+}
+
+.article_home > p {
+    text-align: center;
+    margin: 1rem;
+}
+
+.article_home > p > a:hover {
+    color: #0c4a6e;
+}
+
+h2 {
+    text-align: center;
+    font-size: 5rem;
+    padding: 2rem 0;
+    font-style: italic;
+    position: relative;
+    text-shadow: 2px 2px 2px darkgray;
+}
+
+.form_article {
+    width: 50%;
+    margin: 2rem auto;
+}
+
+.form_article > form > div > div {
+    padding: 2rem;
+    position: relative;
+}
+
+.form_article > form > div > div > label{
+    font-size: 3rem;
+    font-style: italic;
+}
+
+.form_article > form > div > div > input, .form_article > form > div > div > textarea {
+    position: relative;
+    width: 70%;
+    float: right;
+    padding: 1rem;
+}
+
+.form_article > form > div > div > button {
+    font-size: 2rem;
+    padding: 1rem;
+    margin: 2rem auto;
+    display: block;
+    cursor: pointer;
+}

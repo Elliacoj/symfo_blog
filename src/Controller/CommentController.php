@@ -21,7 +21,7 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/article/create_{id}', name: 'app_article_create')]
+    #[Route('/article/create_{id}', name: 'app_comment_create')]
     public function addComment(Article $article, Request $request, EntityManagerInterface $entityManager): Response {
         $comment = new Comment();
         $comment->addArticle($article)->setAuthor($this->getUser());

@@ -1,21 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}{{ category.name }}{% endblock %}
 
 {% block body %}
     <h2>{{ category.name }}</h2>
     {% if is_granted('ROLE_AUTHOR') %}
-        <div>
+        <div class="add">
             <a href="{{ path("app_article_create", {'id': category.id}) }}">Créer un article</a>
         </div>
     {% endif %}
 
     {% if articles|length > 0  %}
         {% for article in articles %}
-            <div>
+            <div class="article_home">
                 <h3>{{ article.title }}</h3>
-                <p>{{ article.author.email }}</p>
-                <p>{{ article.datetime|date("m/d/Y") }}</p>
+                <div>
+                    <p>par {{ article.author.email }}</p>
+                    <p>le {{ article.datetime|date("m/d/Y") }}</p>
+                </div>
                 <p><a href="{{ path('app_article', { 'id': article.id}) }}">Lire l'article</a></p>
             </div>
         {% endfor %}

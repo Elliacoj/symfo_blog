@@ -40,8 +40,8 @@ class ArticleController extends AbstractController
 
         return $this->render('article/index.html.twig', [
             'article' => $article,
-            "form" => $form->createView()
-
+            "form" => $form->createView(),
+            "user" => $this->getUser()->getUserIdentifier()
         ]);
     }
 
@@ -70,5 +70,30 @@ class ArticleController extends AbstractController
             'form' => $form->createView()
             ]
         );
+    }
+
+    #[Route('/article/edit_{id}', name: 'app_article_edit')]
+    public function update(Article $article, Request $request, EntityManagerInterface $entityManager): Response {
+        $form = $this->createForm(ArticleType::class, $article, []);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            return $this->redirectToRoute('app_article', ["id" => $article->getId()]);
+        }
+
+        return $this->render('article/edit.html.twig', [
+                'form' => $form->createView()
+            ]
+        );
+    }
+
+    #[Route('/article/delete_{id}', name: 'app_article_delete')]
+    public function delete(Article $article, Request $request, EntityManagerInterface $entityManager): Response {
+        $entityManager->remove($article);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_home');
     }
 }
