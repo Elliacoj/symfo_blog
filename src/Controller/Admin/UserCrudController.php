@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
@@ -20,7 +21,7 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             TextField::new('email'),
-            TextField::new('password'),
+            Field::new('password'),
             BooleanField::new('isVerified'),
             ArrayField::new('roles')
         ];

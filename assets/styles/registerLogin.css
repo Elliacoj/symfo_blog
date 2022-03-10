@@ -1,0 +1,32 @@
+#register_form, #Create_div {
+    width: 50%;
+    margin: 2rem auto;
+}
+
+#register_form label {
+    display: block;
+    text-align: center;
+    font-size: 2.5rem;
+    padding-bottom: 1rem;
+}
+
+#register_form  div {
+    margin: 2rem 0;
+}
+
+#register_form input {
+    width: 100%;
+    padding: 1rem;
+}
+
+#register_form button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+#Create_div a {
+    color: #0c4a6e;
+}
+

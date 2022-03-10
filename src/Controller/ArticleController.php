@@ -7,9 +7,7 @@ use App\Entity\Category;
 use App\Entity\Comment;
 use App\Form\ArticleType;
 use App\Form\CommentType;
-use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use phpDocumentor\Reflection\Location;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,10 +36,17 @@ class ArticleController extends AbstractController
             return $this->redirect($_SERVER['HTTP_REFERER']);
         }
 
+        if($this->getUser()) {
+            $user = $this->getUser()->getUserIdentifier();
+        }
+        else {
+            $user = "";
+        }
+
         return $this->render('article/index.html.twig', [
             'article' => $article,
             "form" => $form->createView(),
-            "user" => $this->getUser()->getUserIdentifier()
+            "user" => $user
         ]);
     }
 
@@ -90,7 +95,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/article/delete_{id}', name: 'app_article_delete')]
-    public function delete(Article $article, Request $request, EntityManagerInterface $entityManager): Response {
+    public function delete(Article $article, EntityManagerInterface $entityManager): Response {
         $entityManager->remove($article);
         $entityManager->flush();
 

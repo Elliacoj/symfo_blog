@@ -30,7 +30,13 @@
             {% for comment in article.comments %}
             <div class="commentary">
                 <p>{{ comment.content }}</p>
-                <p>par {{ comment.author.email }}</p>
+                {% if user == article.author.email or is_granted('ROLE_MODERATOR') %}
+                <div>
+                    <p><a href="{{ path('app_comment_edit', {"id": comment.id}) }}">Editer</a></p>
+                    <p><a href="{{ path('app_comment_delete', {"id": comment.id}) }}">Supprimer</a></p>
+                </div>
+                {% endif %}
+                <p class="commentary_author">par {{ comment.author.email }}</p>
             </div>
             {% endfor %}
         </div>

@@ -3,6 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -15,14 +16,20 @@
         {% endif %}
 
         <h2 class="h3 mb-3 font-weight-normal">Connection</h2>
-        <label for="inputEmail">Email</label>
-        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-        <label for="inputPassword">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
-        >
+        <div id="register_form">
+            <div>
+                <label for="inputEmail">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+            </div>
+            <div>
+                <label for="inputPassword">Password</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+            </div>
+            <div>
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+            </div>
 
         {#
             Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -38,8 +45,9 @@
         <button class="btn btn-lg btn-primary" type="submit">
             Login
         </button>
+        </div>
     </form>
-    <div>
+    <div id="Create_div">
         <p>Pas de compte? Créez en un <a href="{{ path('app_register') }}">ici</a></p>
     </div>
 {% endblock %}

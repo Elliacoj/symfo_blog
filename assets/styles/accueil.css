@@ -12,6 +12,11 @@
     color: #0c4a6e;
 }
 
+#div_title {
+    width: 100%;
+    overflow: hidden;
+}
+
 h1 {
     text-align: center;
     font-size: 6rem;

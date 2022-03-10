@@ -21,7 +21,7 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/article/create_{id}', name: 'app_comment_create')]
+    #[Route('/comment/create_{id}', name: 'app_comment_create')]
     public function addComment(Article $article, Request $request, EntityManagerInterface $entityManager): Response {
         $comment = new Comment();
         $comment->addArticle($article)->setAuthor($this->getUser());
@@ -35,5 +35,33 @@ class CommentController extends AbstractController
         }
 
         return $this->redirectToRoute('app_article', ["id" => $article->getId()]);
+    }
+
+    #[Route('/comment/delete_{id}', name: 'app_comment_delete')]
+    public function deleteComment(Comment $comment, EntityManagerInterface $entityManager): Response {
+        $article = $comment->getArticle()->getValues()[0]->getId();
+        $entityManager->remove($comment);
+        $entityManager->flush();
+
+
+        return $this->redirectToRoute('app_article', ["id" => $article]);
+    }
+
+    #[Route('/comment/edit_{id}', name: 'app_comment_edit')]
+    public function editComment(Comment $comment, Request $request, EntityManagerInterface $entityManager): Response {
+        $article = $comment->getArticle()->getValues()[0]->getId();
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            return $this->redirectToRoute('app_article', ["id" => $article]);
+        }
+
+        return $this->render('comment/index.html.twig', [
+                'form' => $form->createView()
+            ]
+        );
     }
 }

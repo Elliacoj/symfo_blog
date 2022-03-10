@@ -21,6 +21,7 @@ class CommentCrudController extends AbstractCrudController
         return [
             TextEditorField::new('content'),
             AssociationField::new('author'),
+            AssociationField::new('article')
         ];
     }
 

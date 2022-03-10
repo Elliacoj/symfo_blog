@@ -1,5 +1,6 @@
 @import "accueil.css";
 @import "article.css";
+@import "registerLogin.css";
 
 * {
     margin: 0;
@@ -15,7 +16,6 @@ body {
     font-size: 2rem;
     background-color: #fcfcfc;
     font-family: Calibri, "sans-serif";
-    overflow: hidden;
 }
 
 a {
