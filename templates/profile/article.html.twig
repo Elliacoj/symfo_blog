@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <h2>Article</h2>
+    {% if articles|length > 0  %}
+        {% for article in articles %}
+            {% if article.visibility == "0" %}
+                <div class="article_home">
+                    <h3>{{ article.title }}</h3>
+                    <div>
+                        <p>{{ article.category.name|trans }}</p>
+                        <p>le {{ article.datetime|date("m/d/Y") }}</p>
+                    </div>
+                    <p><a href="{{ path('app_article_edit', {"slug": article.slug}) }}">{% trans %}Update article{% endtrans %}</a></p>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

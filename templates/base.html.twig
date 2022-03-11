@@ -23,6 +23,7 @@
             {% endif %}
 
             {% if is_granted('ROLE_USER') %}
+            <div><a href="{{ path('app_profile') }}">{% trans %}Profile{% endtrans %}</a></div>
             <div><a href="{{ path('app_logout') }}">{% trans %}Logout{% endtrans %}</a></div>
             {% else %}
             <div><a href="{{ path('app_login') }}">{% trans %}Login{% endtrans %}</a></div>

@@ -1,6 +1,7 @@
 @import "accueil.css";
 @import "article.css";
 @import "registerLogin.css";
+@import "profile.css";
 
 * {
     margin: 0;

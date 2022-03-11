@@ -63,7 +63,25 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $article->setCategory($category)->setDatetime(new \DateTime())->setAuthor($this->getUser())->setSlug($this->post_slug($article->getTitle()));
+            $file = $form['img']->getData();
+
+            if($file !== null) {
+                $ext = $file->guessExtension();
+                if(!$ext) {
+                    $ext = "bin";
+                }
+                $img = uniqid() . "." . $ext;
+                $file->move($_SERVER['DOCUMENT_ROOT'] . "images/", $img);
+            }
+            else {
+                $img = "placeholder.png";
+            }
+
+            $article->setCategory($category)
+                ->setDatetime(new \DateTime())
+                ->setAuthor($this->getUser())
+                ->setSlug($this->post_slug($article->getTitle()))
+                ->setImg($img);
             $entityManager->persist($article);
             $entityManager->flush();
 
@@ -83,7 +101,26 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $article->setSlug($this->post_slug($article->getTitle()));
+            $file = $form['img']->getData();
+
+            if($file !== null) {
+                $ext = $file->guessExtension();
+                if(!$ext) {
+                    $ext = "bin";
+                }
+
+                if($article->getImg() !== "placeholder.png") {
+                    unlink("images/article/" . $article->getImg());
+                }
+
+                $img = uniqid() . "." . $ext;
+                $file->move($_SERVER['DOCUMENT_ROOT'] . "images/article/", $img);
+                $article->setImg($img);
+            }
+
+            $article
+                ->setSlug($this->post_slug($article->getTitle()))
+            ;
             $entityManager->flush();
 
             if($article->getVisibility() == 1) {
@@ -101,9 +138,12 @@ class ArticleController extends AbstractController
         );
     }
 
-    #[Route('/article/delete_{id}', name: 'app_article_delete')]
+    #[Route('/article/delete/{id}', name: 'app_article_delete')]
     public function delete(Article $article, EntityManagerInterface $entityManager): Response {
         $entityManager->remove($article);
+        if($article->getImg() !== "placeholder.png") {
+            unlink("images/article/" . $article->getImg());
+        }
         $entityManager->flush();
 
         return $this->redirectToRoute('app_home');

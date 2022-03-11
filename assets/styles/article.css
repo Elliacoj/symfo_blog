@@ -116,3 +116,12 @@
     margin-top: 1rem;
     cursor: pointer;
 }
+
+#article_image {
+    width: 40%;
+    margin: 2rem auto;
+}
+
+#article_image > img {
+    width: 100%;
+}

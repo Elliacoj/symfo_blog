@@ -1,0 +1,28 @@
+#profile {
+    width: 50%;
+    margin: 2rem auto;
+}
+
+#profile img {
+    width: 50%;
+    margin: 2rem auto;
+    display: block;
+}
+
+#profile p {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+#profile a {
+    font-weight: bold;
+}
+
+#profile a:hover {
+    color: #0c4a6e;
+}
+
+#profile > div:last-child {
+    display: flex;
+    justify-content: space-between;
+}

@@ -5,12 +5,16 @@
 {% block body %}
     <div id="article_indiv">
         <h3>{{ article.title }}</h3>
+
         {% if user == article.author.email%}
         <div id="article_edition">
             <p><a href="{{ path('app_article_edit', {"slug": article.slug}) }}">{% trans %}Edit{% endtrans %}</a></p>
             <p><a href="{{ path('app_article_delete', {"id": article.id}) }}">{% trans %}Delete{% endtrans %}</a></p>
         </div>
 
+        <div id="article_image">
+            <img src="/images/article/{{ article.img }}" alt="image">
+        </div>
         {% endif %}
         <p>{{ article.content|nl2br }}</p>
 
