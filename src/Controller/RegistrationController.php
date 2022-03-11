@@ -9,6 +9,7 @@ use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
@@ -35,13 +36,28 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($_FILES['registration_form']['name']['img'] == "") {
+                $img = "default-" . rand(1, 2) . ".jpg";
+            }
+            else {
+                $file = $form['img']->getData();
+                $ext = $file->guessExtension();
+                if(!$ext) {
+                    $ext = "bin";
+                }
+                $img = uniqid() . "." . $ext;
+
+                $file->move($_SERVER['DOCUMENT_ROOT'] . "images/", $img);
+            }
+
             // encode the plain password
             $user->setPassword(
             $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
-            )->setRoles(['ROLE_ADMIN']);
+            )
+                ->setImg($img);
 
             $entityManager->persist($user);
             $entityManager->flush();

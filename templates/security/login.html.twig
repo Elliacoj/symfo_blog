@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}{% trans %}Login{% endtrans %}{% endblock %}
 
 {% block body %}
 
@@ -15,7 +15,7 @@
             </div>
         {% endif %}
 
-        <h2 class="h3 mb-3 font-weight-normal">Connection</h2>
+        <h2 class="h3 mb-3 font-weight-normal">{% trans %}Login{% endtrans %}</h2>
         <div id="register_form">
             <div>
                 <label for="inputEmail">Email</label>
@@ -43,11 +43,11 @@
         #}
 
         <button class="btn btn-lg btn-primary" type="submit">
-            Login
+            {% trans %}Login{% endtrans %}
         </button>
         </div>
     </form>
     <div id="Create_div">
-        <p>Pas de compte? Créez en un <a href="{{ path('app_register') }}">ici</a></p>
+        <p>{% trans %}No account? Click{% endtrans %}<a href="{{ path('app_register') }}"> {% trans %}here{% endtrans %} </a>{% trans %}for create a new account{% endtrans %}</p>
     </div>
 {% endblock %}

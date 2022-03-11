@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}{% trans %}Home{% endtrans %}{% endblock %}
 
 {% block body %}
     <div id="div_title">
@@ -10,22 +10,24 @@
     <div id="menu_categories">
         {% for category in categories %}
             <div>
-                <a href="{{ path('app_category', { 'id': category.id}) }}">{{ category.name }}</a>
+                <a href="{{ path('app_category', { 'id': category.id}) }}">{{ category.name|trans }}</a>
             </div>
         {% endfor %}
     </div>
 
     {% if articles|length > 0  %}
         {% for article in articles %}
+            {% if article.visibility == "1" %}
             <div class="article_home">
                 <h3>{{ article.title }}</h3>
                 <div>
-                    <p>{{ article.category.name }}</p>
+                    <p>{{ article.category.name|trans }}</p>
                     <p> par {{ article.author.email }}</p>
                     <p>le {{ article.datetime|date("m/d/Y") }}</p>
                 </div>
-                <p><a href="{{ path('app_article', { 'id': article.id}) }}">Lire l'article</a></p>
+                <p><a href="{{ path('app_article', { 'slug': article.slug}) }}">{% trans %}Read article{% endtrans %}</a></p>
             </div>
+                {% endif %}
         {% endfor %}
     {% endif %}
 {% endblock %}

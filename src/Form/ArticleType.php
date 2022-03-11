@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,6 +22,11 @@ class ArticleType extends AbstractType
             ])
             ->add('content', TextareaType::class, [
                 'data' => $builder->getData()->getcontent()
+            ])
+            ->add('visibility', CheckboxType::class, [
+                'label' => "published",
+                'data' => $builder->getData()->getVisibility(),
+                "required" => false
             ])
             ->add('submit', SubmitType::class)
         ;

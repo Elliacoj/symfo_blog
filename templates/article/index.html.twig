@@ -7,8 +7,8 @@
         <h3>{{ article.title }}</h3>
         {% if user == article.author.email%}
         <div id="article_edition">
-            <p><a href="{{ path('app_article_edit', {"id": article.id}) }}">Editer</a></p>
-            <p><a href="{{ path('app_article_delete', {"id": article.id}) }}">Supprimer</a></p>
+            <p><a href="{{ path('app_article_edit', {"slug": article.slug}) }}">{% trans %}Edit{% endtrans %}</a></p>
+            <p><a href="{{ path('app_article_delete', {"id": article.id}) }}">{% trans %}Delete{% endtrans %}</a></p>
         </div>
 
         {% endif %}
@@ -21,7 +21,7 @@
         </div>
 
         <div id="commentaries">
-            <h4>Commentaire</h4>
+            <h4>{% trans %}Commentaries{% endtrans %}</h4>
             {% if is_granted('ROLE_USER') %}
             <div id="commentaries_form">
                 {{ form(form) }}
@@ -32,8 +32,8 @@
                 <p>{{ comment.content }}</p>
                 {% if user == article.author.email or is_granted('ROLE_MODERATOR') %}
                 <div>
-                    <p><a href="{{ path('app_comment_edit', {"id": comment.id}) }}">Editer</a></p>
-                    <p><a href="{{ path('app_comment_delete', {"id": comment.id}) }}">Supprimer</a></p>
+                    <p><a href="{{ path('app_comment_edit', {"id": comment.id}) }}">{% trans %}Edit{% endtrans %}</a></p>
+                    <p><a href="{{ path('app_comment_delete', {"id": comment.id}) }}">{% trans %}Delete{% endtrans %}</a></p>
                 </div>
                 {% endif %}
                 <p class="commentary_author">par {{ comment.author.email }}</p>

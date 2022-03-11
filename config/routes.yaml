@@ -5,3 +5,9 @@ controllers:
 kernel:
     resource: ../src/Kernel.php
     type: annotation
+
+contact:
+    path:       /{_locale}/contact
+    controller: App\Controller\HomeController::changeLanguage
+    requirements:
+        _locale: en|fr

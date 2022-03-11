@@ -1,25 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ category.name }}{% endblock %}
+{% block title %}{{ category.name|trans }}{% endblock %}
 
 {% block body %}
-    <h2>{{ category.name }}</h2>
+    <h2>{{ category.name|trans }}</h2>
     {% if is_granted('ROLE_AUTHOR') %}
         <div class="add">
-            <a href="{{ path("app_article_create", {'id': category.id}) }}">Créer un article</a>
+            <a href="{{ path("app_article_create", {'id': category.id}) }}">{% trans %}Create article{% endtrans %}</a>
         </div>
     {% endif %}
 
     {% if articles|length > 0  %}
         {% for article in articles %}
+            {% if article.visibility == "1" %}
             <div class="article_home">
                 <h3>{{ article.title }}</h3>
                 <div>
                     <p>par {{ article.author.email }}</p>
                     <p>le {{ article.datetime|date("m/d/Y") }}</p>
                 </div>
-                <p><a href="{{ path('app_article', { 'id': article.id}) }}">Lire l'article</a></p>
+                <p><a href="{{ path('app_article', { 'slug': article.slug}) }}">{% trans %}Read article{% endtrans %}</a></p>
             </div>
+            {% endif %}
         {% endfor %}
     {% endif %}
 {% endblock %}

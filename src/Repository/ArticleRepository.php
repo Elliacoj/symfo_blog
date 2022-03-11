@@ -49,7 +49,7 @@ class ArticleRepository extends ServiceEntityRepository
      * @return Article[]
      */
     public function findByThree(): array {
-        return $this->findBy([], ['id' => 'DESC'],3);
+        return $this->findBy(["visibility" => "1"], ['id' => 'DESC'],3);
     }
 
     /**

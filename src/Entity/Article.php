@@ -34,6 +34,15 @@ class Article
     #[ORM\ManyToMany(targetEntity: Comment::class, mappedBy: 'article')]
     private $comments;
 
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $img;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $slug;
+
+    #[ORM\Column(type: 'boolean')]
+    private $visibility;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -134,5 +143,41 @@ class Article
     public function __toString(): string
     {
         return $this->getTitle();
+    }
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(?string $img): self
+    {
+        $this->img = $img;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getVisibility(): ?bool
+    {
+        return $this->visibility;
+    }
+
+    public function setVisibility(bool $visibility): self
+    {
+        $this->visibility = $visibility;
+
+        return $this;
     }
 }
